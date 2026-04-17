@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import Plot from 'react-plotly.js';
+import Plot from '../PlotlyComponent';
 import { weightedScores } from '../data/researchData';
 
 const FINDING_CARDS = [

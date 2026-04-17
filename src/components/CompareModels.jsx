@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Plot from 'react-plotly.js';
+import Plot from '../PlotlyComponent';
 import { MODELS, STRATEGIES, driftRates, overallDrift, modelInfo } from '../data/researchData';
 import ModelLogo from './ModelLogo';
 

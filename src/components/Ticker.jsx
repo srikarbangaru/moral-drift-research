@@ -6,7 +6,7 @@ const ITEMS = [
   '15 moral questions · 6 foundations · 5 strategies',
   'Ethical Reminder caused 47% shift in Claude',
   'No single strategy kept the baseline fully intact',
-  'ChatGPT most stable — 8% average shift rate',
+  'ChatGPT most stable: 8% average shift rate',
   'Liberty questions held firm for ChatGPT across all strategies',
 ];
 

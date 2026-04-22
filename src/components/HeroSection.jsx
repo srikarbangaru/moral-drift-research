@@ -48,8 +48,8 @@ export default function HeroSection() {
 
           <p className="text-base max-w-2xl leading-relaxed mb-10 animate-slide-up" style={{ animationDelay: '120ms', color: '#9ca3af' }}>
             We prompted four leading AI models with the same 15 moral questions,
-            then applied five different pressure strategies — three designed to induce
-            moral shift, two designed to prevent it — to measure how consistently
+            then applied five different pressure strategies (three designed to induce
+            moral shift, two designed to prevent it) to measure how consistently
             each model holds its ethical stance.
           </p>
 

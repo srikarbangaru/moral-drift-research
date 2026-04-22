@@ -1,7 +1,14 @@
-export default function DarkDivider({ quote, author }) {
+export default function DarkDivider() {
+  const stats = [
+    { value: '100%', label: 'DeepSeek shift rate under persuasion', color: '#f87171' },
+    { value: '47%',  label: 'Claude shifted when given an ethical reminder', color: '#fbbf24' },
+    { value: '0',    label: 'strategies that fully preserved the baseline', color: '#a5b4fc' },
+    { value: '56%',  label: 'Gemini average shift across all 5 strategies', color: '#c4b5fd' },
+  ];
+
   return (
     <div
-      className="relative overflow-hidden py-12"
+      className="relative overflow-hidden py-14"
       style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)' }}
     >
       <div
@@ -11,18 +18,18 @@ export default function DarkDivider({ quote, author }) {
           backgroundSize: '28px 28px',
         }}
       />
-      <div className="relative max-w-5xl mx-auto px-6 text-center">
-        <div className="inline-block mb-4">
-          <div className="w-10 h-0.5 mx-auto" style={{ background: 'linear-gradient(90deg, #6366f1, #a855f7)' }} />
-        </div>
-        <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto leading-relaxed" style={{ color: '#c7d2fe' }}>
-          &ldquo;{quote}&rdquo;
+      <div className="relative max-w-5xl mx-auto px-6">
+        <p className="text-xs font-semibold uppercase tracking-widest text-center mb-8" style={{ color: '#4b5563' }}>
+          Key numbers
         </p>
-        {author && (
-          <p className="mt-4 text-xs uppercase tracking-widest font-semibold" style={{ color: '#6b7280' }}>
-            {author}
-          </p>
-        )}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {stats.map(s => (
+            <div key={s.label} className="text-center">
+              <p className="text-4xl font-bold mb-2" style={{ color: s.color }}>{s.value}</p>
+              <p className="text-xs leading-relaxed" style={{ color: '#9ca3af' }}>{s.label}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -74,9 +74,9 @@ export default function StabilizersSection() {
             Models changed their moral stance even with stabilizing strategies
           </p>
           <p className="text-sm text-amber-700 leading-relaxed">
-            The green bars below should ideally be near zero — they represent strategies specifically
+            The green bars below should ideally be near zero. They represent strategies specifically
             designed to keep models consistent. Instead, every model shows meaningful shift under
-            stabilizers too. For Gemini, the stabilizer average was <strong>57%</strong> — barely
+            stabilizers too. For Gemini, the stabilizer average was <strong>57%</strong>, barely
             lower than its inducer average.
           </p>
         </div>

@@ -13,7 +13,7 @@ export default function ModelExplorer() {
   const info  = modelInfo[active];
   const rates = driftRates[active].map(v => Math.round(v * 100));
 
-  // Stabilizer bars get extra width via offset trick — we use a second trace for them
+  // Stabilizer bars get extra width via offset trick - we use a second trace for them
   const inducerIdx   = STRATEGIES.map((s, i) => STRATEGY_TYPE[s] === 'inducer'   ? i : null).filter(i => i !== null);
   const stabilizerIdx= STRATEGIES.map((s, i) => STRATEGY_TYPE[s] === 'stabilizer' ? i : null).filter(i => i !== null);
 
@@ -35,7 +35,7 @@ export default function ModelExplorer() {
       showlegend: false,
       hovertemplate: '<b>%{x}</b><br>Shift rate: <b>%{y}%</b><br><i>Drift-inducing strategy</i><extra></extra>',
     },
-    // Stabilizer bars — wider to stand out
+    // Stabilizer bars - wider to stand out
     {
       type: 'bar',
       name: 'Stabilizer',

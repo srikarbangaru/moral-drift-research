@@ -71,7 +71,7 @@ export default function CompareModels() {
       <div className="border-t border-gray-200 pt-10 mb-8">
         <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Compare all models</p>
         <h2 className="text-2xl font-bold text-gray-900">Which model shifted the most?</h2>
-        <p className="text-sm text-gray-500 mt-1">Compare shift rates across all four models — and see whether stabilizing strategies actually helped.</p>
+        <p className="text-sm text-gray-500 mt-1">Compare shift rates across all four models and see whether stabilizing strategies actually helped.</p>
       </div>
 
       {/* View toggle */}

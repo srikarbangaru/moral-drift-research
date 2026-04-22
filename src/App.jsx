@@ -18,10 +18,7 @@ export default function App() {
         <ModelExplorer />
         <CompareModels />
         <StabilizersSection />
-        <DarkDivider
-          quote="A model that changes its moral stance when simply asked 'are you sure?' does not have moral values — it has moral suggestions."
-          author="Amber Team · 2026"
-        />
+        <DarkDivider />
         <Findings />
       </main>
       <Footer />

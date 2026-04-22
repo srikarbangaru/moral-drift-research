@@ -1,4 +1,4 @@
-// Real research data - "When Models Change Their Minds: Moral Drift in AI Reasoning"
+// Real research data - "When Models Change Their Minds: Moral Shift in AI Reasoning"
 
 export const MODELS = ['ChatGPT', 'Claude', 'DeepSeek', 'Gemini'];
 
@@ -19,7 +19,7 @@ export const STRATEGY_TYPE = {
   'Self-Consistency':  'stabilizer',
 };
 
-// Drift rates per model per strategy (source: Moral Drift Rates.xlsx)
+// Drift rates per model per strategy (source: Moral Shift Rates.xlsx)
 // Value = proportion of 15 questions where the answer changed
 export const driftRates = {
   ChatGPT:  [0.2667, 0.0667, 0.0000, 0.0667, 0.0000],
@@ -49,8 +49,8 @@ export const weightedScores = [
 export const keyStats = [
   { value: '4',    label: 'AI Models Tested',        note: 'ChatGPT, Claude, DeepSeek, Gemini' },
   { value: '15',   label: 'Moral Questions',          note: '6 moral foundations (MFQ)' },
-  { value: '56%',  label: "Gemini's Drift Rate",     note: 'Highest among all models' },
-  { value: '100%', label: 'Harm Questions Drifted',   note: 'Most vulnerable dimension' },
+  { value: '56%',  label: "Gemini's Shift Rate",      note: 'Highest among all models' },
+  { value: '100%', label: 'Harm Questions Shifted',   note: 'Most vulnerable dimension' },
 ];
 
 // Model descriptions
@@ -62,7 +62,7 @@ export const modelInfo = {
     logo: '/logos/chatgpt.svg',
     logoType: 'icon',      // square icon - render at fixed w/h
     tagline: 'Most stable overall',
-    summary: 'ChatGPT held up best, with only 8% average drift. It was completely stable under Emotional Framing and Self-Consistency, but still shifted on ~27% of questions when directly pressured.',
+    summary: 'ChatGPT held up best, with only 8% average shift. It was completely stable under Emotional Framing and Self-Consistency, but still shifted on ~27% of questions when directly pressured.',
   },
   Claude: {
     color: '#d97706',
@@ -71,7 +71,7 @@ export const modelInfo = {
     logo: '/logos/claude.svg',
     logoType: 'wordmark',  // wide horizontal text logo
     tagline: 'Surprising instability',
-    summary: 'Claude appeared principled but drifted most under Ethical Reminder (47%!) - the very strategy meant to stabilize it. Role Prompting also caused notable drift at 33%.',
+    summary: 'Claude appeared principled but shifted most under Ethical Reminder (47%!) - the very strategy meant to stabilize it. Role Prompting also caused notable shift at 33%.',
   },
   DeepSeek: {
     color: '#ef4444',
@@ -80,7 +80,7 @@ export const modelInfo = {
     logo: '/logos/deepseek.svg',
     logoType: 'wordmark',
     tagline: 'Extreme persuasion sensitivity',
-    summary: 'DeepSeek changed its answer on every single question (100%) under persuasion - the highest drift rate recorded. Yet it was perfectly stable under Role Prompting and Self-Consistency.',
+    summary: 'DeepSeek changed its answer on every single question (100%) under persuasion - the highest shift rate recorded. Yet it was perfectly stable under Role Prompting and Self-Consistency.',
   },
   Gemini: {
     color: '#8b5cf6',
@@ -89,6 +89,6 @@ export const modelInfo = {
     logo: '/logos/gemini.svg',
     logoType: 'wordmark',
     tagline: 'Most susceptible model',
-    summary: 'Gemini drifted 53–60% across all strategies including both stabilizers. It was the only model where even Self-Consistency failed to help, showing persistent moral instability.',
+    summary: 'Gemini shifted 53-60% across all strategies including both stabilizers. It was the only model where even Self-Consistency failed to help, showing persistent moral instability.',
   },
 };

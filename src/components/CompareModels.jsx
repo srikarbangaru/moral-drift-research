@@ -1,21 +1,30 @@
 import { useState } from 'react';
 import Plot from '../PlotlyComponent';
-import { MODELS, STRATEGIES, driftRates, overallDrift, modelInfo } from '../data/researchData';
+import { MODELS, STRATEGIES, STRATEGY_TYPE, driftRates, overallDrift, modelInfo } from '../data/researchData';
 import ModelLogo from './ModelLogo';
 
 const VIEW_OPTIONS = [
-  { id: 'byStrategy', label: 'By Strategy' },
-  { id: 'overall',    label: 'Overall Drift' },
+  { id: 'byStrategy',  label: 'By Strategy' },
+  { id: 'overall',     label: 'Overall Shift' },
+  { id: 'stabVsInd',   label: 'Stabilizers vs Inducers' },
 ];
 
+// Average drift across inducer strategies per model
+const inducerAvg = (m) => {
+  const vals = STRATEGIES.map((s, i) => STRATEGY_TYPE[s] === 'inducer' ? driftRates[m][i] : null).filter(v => v !== null);
+  return vals.reduce((a, b) => a + b, 0) / vals.length;
+};
+// Average drift across stabilizer strategies per model
+const stabilizerAvg = (m) => {
+  const vals = STRATEGIES.map((s, i) => STRATEGY_TYPE[s] === 'stabilizer' ? driftRates[m][i] : null).filter(v => v !== null);
+  return vals.reduce((a, b) => a + b, 0) / vals.length;
+};
+
 export default function CompareModels() {
-  const [view, setView]       = useState('byStrategy');
+  const [view,     setView]     = useState('byStrategy');
   const [chartKey, setChartKey] = useState(0);
 
-  const switchView = (v) => {
-    setView(v);
-    setChartKey(k => k + 1);
-  };
+  const switchView = (v) => { setView(v); setChartKey(k => k + 1); };
 
   // ── By strategy: grouped bar ────────────────────────────────────────────────
   const byStrategyData = MODELS.map(m => ({
@@ -27,98 +36,87 @@ export default function CompareModels() {
     hovertemplate: `<b>${m}</b><br>%{x}: <b>%{y}%</b><extra></extra>`,
   }));
 
-  // ── Overall: horizontal bar sorted ─────────────────────────────────────────
+  // ── Overall: horizontal bar sorted (no emoji) ───────────────────────────────
   const sorted = [...MODELS].sort((a, b) => overallDrift[b] - overallDrift[a]);
   const overallData = [{
     type: 'bar',
     orientation: 'h',
     x: sorted.map(m => Math.round(overallDrift[m] * 100)),
-    y: sorted.map(m => `${modelInfo[m].emoji}  ${m}`),
+    y: sorted.map(m => m),
     marker: { color: sorted.map(m => modelInfo[m].color) },
     text: sorted.map(m => `${Math.round(overallDrift[m] * 100)}%`),
     textposition: 'outside',
     textfont: { size: 13, family: 'JetBrains Mono', color: '#6b7280' },
     cliponaxis: false,
-    hovertemplate: '<b>%{y}</b><br>Avg drift: <b>%{x}%</b><extra></extra>',
+    hovertemplate: '<b>%{y}</b><br>Avg shift rate: <b>%{x}%</b><extra></extra>',
   }];
+
+  // ── Stabilizers vs Inducers ─────────────────────────────────────────────────
+  const stabVsIndData = [
+    {
+      type: 'bar',
+      name: 'Inducers (Persuasion, Role, Emotional)',
+      x: MODELS,
+      y: MODELS.map(m => Math.round(inducerAvg(m) * 100)),
+      marker: { color: '#f87171' },
+      hovertemplate: '<b>%{x}</b><br>Avg inducer shift: <b>%{y}%</b><extra></extra>',
+    },
+    {
+      type: 'bar',
+      name: 'Stabilizers (Ethical Reminder, Self-Consistency)',
+      x: MODELS,
+      y: MODELS.map(m => Math.round(stabilizerAvg(m) * 100)),
+      marker: { color: '#4ade80' },
+      hovertemplate: '<b>%{x}</b><br>Avg stabilizer shift: <b>%{y}%</b><extra></extra>',
+    },
+  ];
 
   const sharedLayout = {
     paper_bgcolor: 'transparent',
     plot_bgcolor:  'transparent',
     font: { family: 'Inter, sans-serif', size: 12, color: '#6b7280' },
-    hoverlabel: {
-      bgcolor: '#1f2937',
-      bordercolor: '#374151',
-      font: { color: '#f9fafb', size: 12 },
-    },
+    hoverlabel: { bgcolor: '#1f2937', bordercolor: '#374151', font: { color: '#f9fafb', size: 12 } },
     transition: { duration: 500, easing: 'cubic-in-out' },
   };
 
   const byStratLayout = {
     ...sharedLayout,
-    barmode: 'group',
-    bargap: 0.25,
-    bargroupgap: 0.08,
-    xaxis: {
-      tickfont: { size: 11, color: '#374151' },
-      linecolor: '#e5e7eb',
-      gridcolor: 'transparent',
-      fixedrange: true,
-    },
-    yaxis: {
-      range: [0, 115],
-      ticksuffix: '%',
-      tickfont: { size: 10, family: 'JetBrains Mono', color: '#9ca3af' },
-      gridcolor: '#f3f4f6',
-      linecolor: 'transparent',
-      zerolinecolor: '#e5e7eb',
-      fixedrange: true,
-    },
-    legend: {
-      orientation: 'h',
-      x: 0.5, xanchor: 'center',
-      y: -0.2,
-      font: { size: 12 },
-      bgcolor: 'transparent',
-    },
+    barmode: 'group', bargap: 0.25, bargroupgap: 0.08,
+    xaxis: { tickfont: { size: 11, color: '#374151' }, linecolor: '#e5e7eb', gridcolor: 'transparent', fixedrange: true },
+    yaxis: { range: [0, 115], ticksuffix: '%', tickfont: { size: 10, family: 'JetBrains Mono', color: '#9ca3af' }, gridcolor: '#f3f4f6', linecolor: 'transparent', zerolinecolor: '#e5e7eb', fixedrange: true },
+    legend: { orientation: 'h', x: 0.5, xanchor: 'center', y: -0.2, font: { size: 12 }, bgcolor: 'transparent' },
     margin: { l: 44, r: 20, t: 10, b: 80 },
     height: 340,
   };
 
   const overallLayout = {
     ...sharedLayout,
-    xaxis: {
-      range: [0, 110],
-      ticksuffix: '%',
-      tickfont: { size: 10, family: 'JetBrains Mono', color: '#9ca3af' },
-      gridcolor: '#f3f4f6',
-      linecolor: 'transparent',
-      zerolinecolor: '#e5e7eb',
-      fixedrange: true,
-    },
-    yaxis: {
-      tickfont: { size: 13, color: '#374151' },
-      linecolor: 'transparent',
-      gridcolor: 'transparent',
-      fixedrange: true,
-      automargin: true,
-    },
+    xaxis: { range: [0, 110], ticksuffix: '%', tickfont: { size: 10, family: 'JetBrains Mono', color: '#9ca3af' }, gridcolor: '#f3f4f6', linecolor: 'transparent', zerolinecolor: '#e5e7eb', fixedrange: true },
+    yaxis: { tickfont: { size: 13, color: '#374151' }, linecolor: 'transparent', gridcolor: 'transparent', fixedrange: true, automargin: true },
     margin: { l: 20, r: 70, t: 10, b: 40 },
     height: 260,
+  };
+
+  const stabVsIndLayout = {
+    ...sharedLayout,
+    barmode: 'group', bargap: 0.3, bargroupgap: 0.1,
+    xaxis: { tickfont: { size: 13, color: '#374151' }, linecolor: '#e5e7eb', gridcolor: 'transparent', fixedrange: true },
+    yaxis: { range: [0, 115], ticksuffix: '%', tickfont: { size: 10, family: 'JetBrains Mono', color: '#9ca3af' }, gridcolor: '#f3f4f6', linecolor: 'transparent', zerolinecolor: '#e5e7eb', fixedrange: true, title: { text: 'Avg shift rate', font: { size: 11 } } },
+    legend: { orientation: 'h', x: 0.5, xanchor: 'center', y: -0.22, font: { size: 11 }, bgcolor: 'transparent' },
+    margin: { l: 54, r: 20, t: 16, b: 80 },
+    height: 340,
   };
 
   return (
     <section id="compare" className="max-w-5xl mx-auto px-6 py-10">
       <div className="border-t border-gray-200 pt-10 mb-8">
         <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Compare all models</p>
-        <h2 className="text-2xl font-bold text-gray-900">Which model drifted the most?</h2>
-        <p className="text-sm text-gray-500 mt-1">
-          Compare drift rates across all four models at once.
-        </p>
+        <h2 className="text-2xl font-bold text-gray-900">Which model shifted the most?</h2>
+        <p className="text-sm text-gray-500 mt-1">Compare shift rates across all four models — and see whether stabilizing strategies actually helped.</p>
       </div>
 
       {/* View toggle */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-6">
         {VIEW_OPTIONS.map(o => (
           <button
             key={o.id}
@@ -136,25 +134,27 @@ export default function CompareModels() {
       </div>
 
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        {view === 'stabVsInd' && (
+          <div className="mb-3 p-3 rounded-xl bg-amber-50 border border-amber-200">
+            <p className="text-sm text-amber-800">
+              <span className="font-semibold">The key finding:</span> Even the green stabilizer bars show significant shift rates — meaning models changed their moral stance even when they were specifically prompted NOT to.
+            </p>
+          </div>
+        )}
         <div key={chartKey} className="animate-fade-in">
-          {view === 'byStrategy' ? (
-            <Plot
-              data={byStrategyData}
-              layout={byStratLayout}
-              config={{ responsive: true, displayModeBar: false }}
-              style={{ width: '100%' }}
-              useResizeHandler
-            />
-          ) : (
+          {view === 'byStrategy' && (
+            <Plot data={byStrategyData} layout={byStratLayout} config={{ responsive: true, displayModeBar: false }} style={{ width: '100%' }} useResizeHandler />
+          )}
+          {view === 'overall' && (
             <>
-              <p className="text-xs text-gray-400 mb-2 font-mono">Average drift rate across all 5 strategies</p>
-              <Plot
-                data={overallData}
-                layout={overallLayout}
-                config={{ responsive: true, displayModeBar: false }}
-                style={{ width: '100%' }}
-                useResizeHandler
-              />
+              <p className="text-xs text-gray-400 mb-2 font-mono">Average shift rate across all 5 strategies</p>
+              <Plot data={overallData} layout={overallLayout} config={{ responsive: true, displayModeBar: false }} style={{ width: '100%' }} useResizeHandler />
+            </>
+          )}
+          {view === 'stabVsInd' && (
+            <>
+              <p className="text-xs text-gray-500 mb-3">Red = drift-inducing strategies avg &nbsp;·&nbsp; Green = stabilizing strategies avg</p>
+              <Plot data={stabVsIndData} layout={stabVsIndLayout} config={{ responsive: true, displayModeBar: false }} style={{ width: '100%' }} useResizeHandler />
             </>
           )}
         </div>
@@ -167,19 +167,13 @@ export default function CompareModels() {
           const pct  = Math.round(overallDrift[m] * 100);
           const rank = [...MODELS].sort((a, b) => overallDrift[b] - overallDrift[a]).indexOf(m) + 1;
           return (
-            <div
-              key={m}
-              className="rounded-xl border p-4 flex flex-col items-center justify-center text-center"
-              style={{ background: mi.bg, borderColor: mi.border }}
-            >
+            <div key={m} className="rounded-xl border p-4 flex flex-col items-center justify-center text-center" style={{ background: mi.bg, borderColor: mi.border }}>
               <div className="flex items-center justify-center h-8 w-full mb-1">
                 <ModelLogo model={m} size={22} />
               </div>
-              {mi.logoType === 'icon' && (
-                <p className="text-sm font-semibold text-gray-700 mt-1">{m}</p>
-              )}
+              {mi.logoType === 'icon' && <p className="text-sm font-semibold text-gray-700 mt-1">{m}</p>}
               <p className="text-2xl font-bold mt-2" style={{ color: mi.color }}>{pct}%</p>
-              <p className="text-xs text-gray-400 mt-0.5">avg drift · #{rank}</p>
+              <p className="text-xs text-gray-400 mt-0.5">avg shift · #{rank}</p>
             </div>
           );
         })}

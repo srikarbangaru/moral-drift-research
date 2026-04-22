@@ -84,13 +84,6 @@ export default function HeroSection() {
             </p>
           </div>
 
-          {/* Scroll cue */}
-          <div className="mt-10 flex items-center gap-2 animate-fade-in" style={{ animationDelay: '600ms' }}>
-            <div className="w-5 h-8 rounded-full border flex items-start justify-center pt-1.5" style={{ borderColor: '#374151' }}>
-              <div className="w-1 h-1.5 rounded-full animate-bounce" style={{ background: '#818cf8' }} />
-            </div>
-            <span className="text-xs" style={{ color: '#4b5563' }}>Scroll to explore</span>
-          </div>
         </div>
       </div>
 

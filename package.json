@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://srikarbangaru.github.io/moral-drift-research",
+  "homepage": "https://srikarbangaru.github.io/moral-shift-research",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -7,23 +7,26 @@ export default function HeroSection() {
     <>
       {/* ── Hero ── */}
       <div
-        className="relative overflow-hidden"
+        className="relative"
         style={{ background: 'linear-gradient(160deg, #05050d 0%, #0f0b2e 40%, #05050d 100%)' }}
       >
-        {/* Dot grid */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: 'radial-gradient(circle, rgba(99,102,241,0.12) 1px, transparent 1px)',
-          backgroundSize: '36px 36px',
-        }} />
-        {/* Glow blobs */}
-        <div className="absolute pointer-events-none" style={{
-          top: '-10%', right: '-5%', width: '500px', height: '500px', borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 65%)',
-        }} />
-        <div className="absolute pointer-events-none" style={{
-          bottom: '-15%', left: '-5%', width: '400px', height: '400px', borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(168,85,247,0.1) 0%, transparent 65%)',
-        }} />
+        {/* Decorative layer — overflow clipped here so blobs don't widen the page */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Dot grid */}
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle, rgba(99,102,241,0.12) 1px, transparent 1px)',
+            backgroundSize: '36px 36px',
+          }} />
+          {/* Glow blobs */}
+          <div className="absolute" style={{
+            top: '-10%', right: '-5%', width: '500px', height: '500px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 65%)',
+          }} />
+          <div className="absolute" style={{
+            bottom: '-15%', left: '-5%', width: '400px', height: '400px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(168,85,247,0.1) 0%, transparent 65%)',
+          }} />
+        </div>
 
         <div className="relative max-w-5xl mx-auto px-6 pt-20 pb-20">
           <p className="text-xs font-semibold uppercase tracking-widest mb-6 animate-fade-in" style={{ color: '#6366f1' }}>

@@ -34,8 +34,8 @@ export default function HeroSection() {
           </p>
 
           <h1
-            className="font-bold leading-none mb-6 animate-slide-up gradient-text"
-            style={{ animationDelay: '60ms', fontSize: 'clamp(3rem, 7vw, 5.5rem)', letterSpacing: '-0.02em' }}
+            className="font-bold leading-tight mb-6 animate-slide-up gradient-text"
+            style={{ animationDelay: '60ms', fontSize: 'clamp(2.6rem, 5.5vw, 5rem)', letterSpacing: '-0.02em', overflowWrap: 'break-word', wordBreak: 'break-word' }}
           >
             When Models<br />Change Their Minds
           </h1>

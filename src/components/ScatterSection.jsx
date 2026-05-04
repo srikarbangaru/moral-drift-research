@@ -182,10 +182,9 @@ export default function ScatterSection() {
             >
               {!selected ? (
                 <div className="flex flex-col items-center justify-center h-full text-center py-12">
-                  <div className="text-4xl mb-4">👆</div>
                   <p className="font-semibold mb-2" style={{ color: '#e5e7eb' }}>Click a dot to inspect</p>
                   <p className="text-sm leading-relaxed" style={{ color: '#6b7280' }}>
-                    Select any point on the chart to see the full question text and what the model answered before and after the strategy was applied.
+                    Select any point to see the full question text and what the model answered before and after.
                   </p>
                 </div>
               ) : (
@@ -209,7 +208,7 @@ export default function ScatterSection() {
                       color:      STRATEGY_TYPE[selected.strat] === 'stabilizer' ? '#4ade80'   : '#f87171',
                     }}
                   >
-                    {STRATEGY_TYPE[selected.strat] === 'stabilizer' ? '🛡 Stabilizer' : '⚡ Pressure'} · {selected.strat}
+                    {STRATEGY_TYPE[selected.strat] === 'stabilizer' ? 'Stabilizer' : 'Pressure'} · {selected.strat}
                   </div>
 
                   {/* Question text */}

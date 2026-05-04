@@ -52,7 +52,7 @@ export default function CompareModels() {
     ...sharedLayout,
     barmode: 'group', bargap: 0.25, bargroupgap: 0.08,
     xaxis: { tickfont: { size: 11, color: '#e5e7eb' }, linecolor: '#374151', gridcolor: 'transparent', fixedrange: true },
-    yaxis: { range: [0, 115], ticksuffix: '%', tickfont: { size: 10, family: 'JetBrains Mono', color: '#9ca3af' }, gridcolor: '#1f2937', linecolor: 'transparent', zerolinecolor: '#374151', fixedrange: true },
+    yaxis: { range: [0, 115], tickfont: { size: 10, family: 'JetBrains Mono', color: '#9ca3af' }, gridcolor: '#1f2937', linecolor: 'transparent', zerolinecolor: '#374151', fixedrange: true },
     legend: { orientation: 'h', x: 0.5, xanchor: 'center', y: -0.2, font: { size: 12, color: '#e5e7eb' }, bgcolor: 'transparent' },
     margin: { l: 44, r: 20, t: 10, b: 80 },
     height: 340,
@@ -60,7 +60,7 @@ export default function CompareModels() {
 
   const overallLayout = {
     ...sharedLayout,
-    xaxis: { range: [0, 110], ticksuffix: '%', tickfont: { size: 10, family: 'JetBrains Mono', color: '#9ca3af' }, gridcolor: '#1f2937', linecolor: 'transparent', zerolinecolor: '#374151', fixedrange: true },
+    xaxis: { range: [0, 110], tickfont: { size: 10, family: 'JetBrains Mono', color: '#9ca3af' }, gridcolor: '#1f2937', linecolor: 'transparent', zerolinecolor: '#374151', fixedrange: true },
     yaxis: { tickfont: { size: 13, color: '#e5e7eb' }, linecolor: 'transparent', gridcolor: 'transparent', fixedrange: true, automargin: true },
     margin: { l: 20, r: 70, t: 10, b: 40 },
     height: 260,

@@ -21,7 +21,7 @@ export default function ModelExplorer() {
   const data = [
     {
       type: 'bar',
-      name: 'Pressure strategies (designed to induce shift)',
+      name: 'Pressure strategies',
       x: inducerIdx.map(i => STRATEGIES[i]),
       y: inducerIdx.map(i => rates[i]),
       width: inducerIdx.map(() => 0.5),
@@ -35,7 +35,7 @@ export default function ModelExplorer() {
     },
     {
       type: 'bar',
-      name: 'Stabilizing strategies (designed to prevent shift)',
+      name: 'Stabilizing strategies',
       x: stabilizerIdx.map(i => STRATEGIES[i]),
       y: stabilizerIdx.map(i => rates[i]),
       width: stabilizerIdx.map(() => 0.5),
@@ -61,8 +61,6 @@ export default function ModelExplorer() {
     },
     yaxis: {
       range: [0, 118],
-      ticksuffix: '%',
-      title: { text: '% of questions where model reversed its position', font: { size: 11, color: '#9ca3af' } },
       tickfont: { size: 11, family: 'JetBrains Mono', color: '#9ca3af' },
       gridcolor: '#f3f4f6',
       linecolor: 'transparent',
@@ -92,10 +90,9 @@ export default function ModelExplorer() {
     <div className="max-w-5xl mx-auto px-6 py-12">
       <div className="mb-8">
         <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: '#6366f1' }}>Explore by model</p>
-        <h2 className="text-3xl font-bold mb-2" style={{ color: '#f9fafb' }}>How often did each model reverse its position?</h2>
-        <p className="text-sm mt-1 max-w-2xl" style={{ color: '#6b7280' }}>
-          Each bar shows the percentage of the 15 questions where the model gave a different answer after that strategy was applied.
-          A higher bar means the model was less consistent.
+        <h2 className="text-3xl font-bold mb-2" style={{ color: '#f9fafb' }}>Reversal rate by strategy</h2>
+        <p className="text-sm mt-1 max-w-2xl" style={{ color: '#9ca3af' }}>
+          How many of the 15 questions each model answered differently after each strategy was applied.
         </p>
       </div>
 
@@ -159,15 +156,9 @@ export default function ModelExplorer() {
           />
         </div>
 
-        {/* Reading guide */}
-        <div className="mx-6 mb-5 rounded-xl p-4 text-sm space-y-1" style={{ background: '#111827', border: '1px solid #1f2937' }}>
-          <p className="font-medium" style={{ color: '#e5e7eb' }}>How to read this chart</p>
-          <p style={{ color: '#6b7280' }}>
-            The y-axis shows what percentage of the 15 moral questions the model answered differently.
-            0% = held its position completely. 100% = reversed every single answer.
-            The two green bars are stabilizing strategies — meant to prevent reversals. When they are tall, the "fix" made things worse.
-          </p>
-        </div>
+        <p className="mx-6 mb-5 text-xs" style={{ color: '#6b7280' }}>
+          Y-axis: reversals out of 15 questions. Green bars are stabilizing strategies.
+        </p>
       </div>
     </div>
     </section>

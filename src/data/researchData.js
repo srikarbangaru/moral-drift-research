@@ -192,30 +192,30 @@ export const answersData = {
   },
 };
 
-// Model display info
+// Model display info — colors match slide presentation
 export const modelInfo = {
   ChatGPT: {
-    color: '#3b82f6', bg: '#eff6ff', border: '#bfdbfe',
+    color: '#d1d5db', bg: '#eff6ff', border: '#bfdbfe',
     logo: '/logos/chatgpt.svg', logoType: 'icon',
     tagline: 'Most consistent model',
-    summary: 'The most consistent model we tested. ChatGPT reversed no answers at all under Emotional Framing and Self-Consistency. It did reverse 4 out of 15 answers when told that experts disagreed, suggesting it responds to authority more than emotion.',
+    summary: 'ChatGPT reversed 0 answers under Emotional Framing and Self-Consistency. Under direct persuasion it reversed 4 of 15. It responds to authority-based pressure but not emotional or consistency-based framing.',
   },
   Claude: {
-    color: '#d97706', bg: '#fffbeb', border: '#fde68a',
+    color: '#f97316', bg: '#fffbeb', border: '#fde68a',
     logo: '/logos/claude.svg', logoType: 'wordmark',
-    tagline: 'Unpredictably inconsistent',
-    summary: 'Claude reversed 7 of 15 answers when given an ethical reminder - the strategy meant to keep it consistent. Only 1 of 15 reversed under Emotional Framing. Its inconsistency is hard to predict in advance.',
+    tagline: 'Reversed most under stabilizers',
+    summary: 'Claude reversed 7 of 15 answers under the Ethical Reminder strategy, which was designed to prevent reversals. Under Emotional Framing it reversed only 1. Its reversal pattern is difficult to anticipate from strategy type alone.',
   },
   DeepSeek: {
-    color: '#ef4444', bg: '#fef2f2', border: '#fecaca',
+    color: '#4d6bfe', bg: '#fef2f2', border: '#fecaca',
     logo: '/logos/deepseek.svg', logoType: 'wordmark',
-    tagline: 'All-or-nothing under pressure',
-    summary: 'When we told DeepSeek that experts disagreed with it, it reversed all 15 of its answers. Yet it held firm under Role Prompting and Self-Consistency with 0 reversals. Its stability depends entirely on the type of pressure applied.',
+    tagline: 'All-or-nothing under persuasion',
+    summary: 'DeepSeek reversed all 15 answers when told experts disagreed. Under Role Prompting and Self-Consistency it reversed 0. Its consistency depends entirely on the type of pressure applied.',
   },
   Gemini: {
-    color: '#8b5cf6', bg: '#f5f3ff', border: '#ddd6fe',
+    color: '#34a853', bg: '#f5f3ff', border: '#ddd6fe',
     logo: '/logos/gemini.svg', logoType: 'wordmark',
-    tagline: 'No strategy worked',
-    summary: 'Gemini reversed between 8 and 9 of its 15 answers under every single strategy, including both stabilizers. It was the only model where Self-Consistency produced no improvement at all.',
+    tagline: 'Shifted under every strategy',
+    summary: 'Gemini reversed 8 or 9 of its 15 answers under every single strategy, including both stabilizers. It was the only model where neither stabilizing strategy reduced reversals.',
   },
 };

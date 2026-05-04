@@ -14,7 +14,7 @@ const stabilizerAvg = (m) => {
 const chartData = [
   {
     type: 'bar',
-    name: 'Inducers avg (Persuasion, Role, Emotional)',
+    name: 'Pressure strategies (avg)',
     x: MODELS,
     y: MODELS.map(m => Math.round(inducerAvg(m) * 100)),
     marker: { color: '#f87171', line: { color: '#ef4444', width: 1 } },
@@ -22,7 +22,7 @@ const chartData = [
   },
   {
     type: 'bar',
-    name: 'Stabilizers avg (Ethical Reminder, Self-Consistency)',
+    name: 'Stabilizing strategies (avg)',
     x: MODELS,
     y: MODELS.map(m => Math.round(stabilizerAvg(m) * 100)),
     marker: { color: '#4ade80', line: { color: '#16a34a', width: 1 } },
@@ -39,7 +39,7 @@ const layout = {
   font: { family: 'Inter, sans-serif', size: 12, color: '#6b7280' },
   xaxis: { tickfont: { size: 13, color: '#e5e7eb' }, linecolor: '#374151', gridcolor: 'transparent', fixedrange: true },
   yaxis: {
-    range: [0, 115], ticksuffix: '%',
+    range: [0, 115],
     tickfont: { size: 11, family: 'JetBrains Mono', color: '#9ca3af' },
     gridcolor: '#1f2937', linecolor: 'transparent', zerolinecolor: '#374151', fixedrange: true,
     title: { text: 'Avg shift rate', font: { size: 11, color: '#9ca3af' } },
@@ -58,29 +58,22 @@ export default function StabilizersSection() {
       <div className="pt-10 mb-6">
         <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: '#6366f1' }}>The paradox</p>
         <h2 className="text-2xl font-bold text-[#f9fafb]">Do stabilizers actually work?</h2>
-        <p className="text-sm text-[#6b7280] mt-1 max-w-2xl">
-          We expected inducer strategies to cause shift and stabilizer strategies to prevent it.
-          The data tells a different story.
+        <p className="text-sm mt-1 max-w-2xl" style={{ color: '#9ca3af' }}>
+          Pressure strategies were expected to cause reversals; stabilizing strategies were designed to prevent them. Neither worked as cleanly as expected.
         </p>
       </div>
 
       {/* Key insight callout */}
       <div
-        className="rounded-2xl p-5 mb-6 flex items-start gap-4"
+        className="rounded-2xl p-5 mb-6"
         style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.3)' }}
       >
-        <span className="text-2xl shrink-0">⚠️</span>
-        <div>
-          <p className="text-sm font-semibold mb-1" style={{ color: '#fcd34d' }}>
-            Models changed their moral stance even with stabilizing strategies
-          </p>
-          <p className="text-sm leading-relaxed" style={{ color: '#d97706' }}>
-            The green bars below should ideally be near zero. They represent strategies specifically
-            designed to keep models consistent. Instead, every model shows meaningful shift under
-            stabilizers too. For Gemini, the stabilizer average was <strong style={{ color: '#fbbf24' }}>57%</strong>, barely
-            lower than its inducer average.
-          </p>
-        </div>
+        <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: '#f59e0b' }}>Key result</p>
+        <p className="text-sm leading-relaxed" style={{ color: '#fcd34d' }}>
+          Every model reversed answers even under stabilizing strategies. For Gemini, the average reversal rate under
+          stabilizers was <strong>57%</strong>, nearly identical to its inducer average.
+          The green bars in the chart below should ideally be near zero.
+        </p>
       </div>
 
       {/* Chart */}

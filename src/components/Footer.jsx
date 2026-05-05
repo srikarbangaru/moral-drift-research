@@ -19,7 +19,6 @@ export default function Footer() {
             </div>
             <p className="text-xs mb-1" style={{ color: '#6b7280' }}>AI & Humanity · CS 4501 · 2026</p>
             <p className="text-xs" style={{ color: '#6b7280' }}>ChatGPT · Claude · DeepSeek · Gemini</p>
-            <p className="text-xs mt-4" style={{ color: '#4b5563' }}>Built with React, Vite & Plotly.js</p>
           </div>
 
           {/* Right: team */}

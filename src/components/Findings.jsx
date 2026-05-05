@@ -225,10 +225,10 @@ export default function Findings() {
         {/* ── Drift Direction ── */}
         <div className="rounded-2xl p-6 mb-14" style={{ background: 'linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(168,85,247,0.08) 100%)', border: '1px solid rgba(99,102,241,0.3)' }}>
           <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: '#818cf8' }}>Drift direction</p>
-          <h3 className="text-lg font-bold mb-2" style={{ color: '#f9fafb' }}>All models drift toward answer B when pressured</h3>
+          <h3 className="text-lg font-bold mb-2" style={{ color: '#f9fafb' }}>When models reverse, they overwhelmingly switch from B to A</h3>
           <p className="text-sm leading-relaxed mb-5" style={{ color: '#9ca3af' }}>
-            Reversal direction is not random. Claude reversed B to A in 100% of its shifts and never went A to B under any strategy.
-            ChatGPT leaned B to A in 75% of shifts. DeepSeek and Gemini showed this bias in roughly 65% of reversals.
+            Reversal direction is not random. Claude switched from B to A in 100% of its reversals and never went A to B under any strategy.
+            ChatGPT showed the same bias in 75% of its reversals. DeepSeek and Gemini drifted both ways but still leaned B to A in roughly 65% of cases.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
